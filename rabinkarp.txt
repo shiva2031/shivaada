@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+int main()
+{
+char txt[100];
+char pat[100];
+scanf("%s",&txt);
+scanf("%s",&pat);
+int pl=strlen(pat);
+int tl=strlen(txt);
+int i=0;
+int h=pl-1;
+int sum=0;
+puts(pat);
+int patternhash=0;
+int windowhash=0;
+
+for(int i=0;i<pl;i++)
+{
+	int value=pat[i]-96;
+
+	 int k=pow(10,h);
+	 
+	patternhash=patternhash+value*k;
+	h--;
+}
+h=pl-1;
+for(int i=0;i<pl;i++)
+{
+	int value=txt[i]-96;
+
+	 int k=pow(10,h);
+	 
+	windowhash=windowhash+value*k;
+	h--;
+}
+printf(" pattern hash %d",patternhash);
+printf(" first window hash is %d",windowhash);
+
+for(i=0;i<tl-pl;i++)
+{h=pl-1;
+int j=0;
+int count=0;
+if(patternhash==windowhash)	
+{
+
+            for (j = 0; j < pl; j++) 
+            { 
+                if (txt[i+j] == pat[j]) 
+                    count++;
+            } 
+  
+              if (count==pl) 
+                printf("Pattern found at index %d \n", i); 
+	
+	
+}
+else
+        { h=pl-1;
+        int rehash=0;
+         for(int l=i+1;l<=i+pl;l++)
+{
+	int value=txt[l]-96;
+printf(" value is %d\n",value);
+	 int k=pow(10,h);
+ 
+	rehash=rehash+(value*k);
+	h--;
+}
+    windowhash=rehash;
+	} 
+	
+}
+
+
+
+}
